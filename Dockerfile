@@ -1,7 +1,7 @@
 FROM gcr.io/distroless/java:11
 
-LABEL name="Java Application" \   
-     maintainer="Ali Kahoot <kahoot.ali@outlook.com>" \
+LABEL name="Java File Upload Application" \
+     maintainer="Kamran Majeed <kamran.majeed@gmail.com>" \
      summary="A Java Spring Boot application"
 
 WORKDIR /app
