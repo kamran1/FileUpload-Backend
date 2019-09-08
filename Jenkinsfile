@@ -1,9 +1,18 @@
 pipeline {
-  agent any
+    agent{
+      docker {
+        image 'maven:3-alpine'
+      }
+    }
     environment {
       registryCredential = 'dockerhub'
     }
     stages {
+      stage('BuildJava') {
+        steps {
+          sh 'mvn -B -DskipTests clean package'
+        }
+      }
       stage('Build') {
         steps {
           sh 'docker build -t kamran/fileupload .'
@@ -11,8 +20,7 @@ pipeline {
       }
       stage('Test') {
         steps {
-          sh 'docker container rm -f node'
-          sh 'docker container run -p 8001:8080 --name node -d kamran/fileupload'
+          sh 'docker container run -p 8001:8080 --name fileuploadservice -d kamran/fileupload'
           sh 'curl -I http://localhost:8001'
         }
       }
