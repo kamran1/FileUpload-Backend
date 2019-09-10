@@ -1,14 +1,11 @@
 pipeline {
-    agent{
-      docker {
-        image 'maven:3-alpine'
-      }
-    }
+    agent any
     environment {
       registryCredential = 'dockerhub'
     }
     stages {
       stage('BuildJava') {
+        agent { docker 'maven:3-alpine' }
         steps {
           sh 'mvn -B -DskipTests clean package'
           sh 'mvn package'
