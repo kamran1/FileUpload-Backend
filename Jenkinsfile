@@ -18,6 +18,7 @@ pipeline {
       }
       stage('Test') {
         steps {
+          sh 'docker container rm -f fileuploadservice'
           sh 'docker container run -p 8001:8080 --name fileuploadservice -d kamran/fileupload'
           sh 'curl -I http://localhost:8001/upload'
         }
