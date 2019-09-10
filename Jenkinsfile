@@ -13,13 +13,13 @@ pipeline {
       }
       stage('Build') {
         steps {
-          sh 'docker build -t kamran1205/fileupload .'
+          sh 'docker build -t fileupload .'
         }
       }
       stage('Test') {
         steps {
           sh 'docker container rm -f fileuploadservice'
-          sh 'docker container run -p 8001:8080 --name fileuploadservice -d kamran1205/fileupload'
+          sh 'docker container run -p 8001:8080 --name fileuploadservice -d fileupload'
           sh 'curl -I http://localhost:8080/upload'
         }
       }
