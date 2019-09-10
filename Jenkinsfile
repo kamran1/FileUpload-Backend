@@ -27,7 +27,7 @@ pipeline {
         steps{
           script {
               docker.withRegistry( '', registryCredential ) {
-                sh 'docker push kamran1205/fileupload:filebackend'
+                sh 'docker push fileupload:filebackend'
               }
           }
         }
